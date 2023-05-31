@@ -1,12 +1,111 @@
-type Request {
-	Name string `path:"name,options=you|me"`
+syntax = "v1"
+
+info(
+	author: "JopenChen"
+	date:   "2023-05-31"
+	desc:   "Trainer"
+)
+
+type GeneralIDRequest {
+	ID int `path:"id"`
 }
 
-type Response {
-	Message string `json:"message"`
+type GeneralResponse {
+	Msg string `json:"msg"`
 }
 
-service trainer-api {
-	@handler TrainerHandler
-	get /from/:name(Request) returns (Response)
+type GroupModel {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	CreateAt int64  `json:"create_at"`
+	UpdateAt int64  `json:"update_at"`
+	DeleteAt int64  `json:"delete_at"`
+}
+
+type CreateGroupRequest {
+	Name string `form:"name"`
+}
+
+type UpdateGroupRequest {
+}
+
+type RetrieveGroupResponse {
+}
+
+@server(
+	prefix: /v1
+	group: group
+)
+service trainer {
+	@handler CreateGroup
+	post /group (CreateGroupRequest) returns (GeneralResponse)
+
+	@handler UpdateGroup
+	put /group/:id (UpdateGroupRequest) returns (GeneralResponse)
+
+	@handler RetrieveGroup
+	get /group/:id (GeneralIDRequest) returns (RetrieveGroupResponse)
+
+	@handler RemoveGroup
+	delete /group/:id (GeneralIDRequest) returns (GeneralResponse)
+}
+
+type QuestionModel {
+}
+
+type CreateQuestionRequest {
+}
+
+type UpdateQuestionRequest {
+}
+
+type RetrieveQuestionResponse {
+}
+
+@server(
+	prefix: /v1
+	group: question
+)
+service trainer {
+	@handler CreateQuestion
+	post /question (CreateQuestionRequest) returns (GeneralResponse)
+
+	@handler UpdateQuestion
+	put /question/:id (UpdateQuestionRequest) returns (GeneralResponse)
+
+	@handler RetrieveQuestion
+	get /question/:id (GeneralIDRequest) returns (RetrieveQuestionResponse)
+
+	@handler RemoveQuestion
+	delete /question/:id (GeneralIDRequest) returns (GeneralResponse)
+}
+
+type AnswerModel {
+}
+
+type CreateAnswerRequest {
+}
+
+type UpdateAnswerRequest {
+}
+
+type RetrieveAnswerResponse {
+}
+
+@server(
+	prefix: /v1
+	group: answer
+)
+service trainer {
+	@handler CreateAnswer
+	post /answer (CreateAnswerRequest) returns (GeneralResponse)
+
+	@handler UpdateAnswer
+	put /answer/:id (UpdateAnswerRequest) returns (GeneralResponse)
+
+	@handler RetrieveAnswer
+	get /answer/:id (GeneralIDRequest) returns (RetrieveAnswerResponse)
+
+	@handler RemoveAnswer
+	delete /answer/:id (GeneralIDRequest) returns (GeneralResponse)
 }

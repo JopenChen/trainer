@@ -1,4 +1,4 @@
-package logic
+package answer
 
 import (
 	"context"
@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type TrainerLogic struct {
+type RetrieveAnswerLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewTrainerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *TrainerLogic {
-	return &TrainerLogic{
+func NewRetrieveAnswerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RetrieveAnswerLogic {
+	return &RetrieveAnswerLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *TrainerLogic) Trainer(req *types.Request) (resp *types.Response, err error) {
+func (l *RetrieveAnswerLogic) RetrieveAnswer(req *types.GeneralIDRequest) (resp *types.RetrieveAnswerResponse, err error) {
 	// todo: add your logic here and delete this line
 
 	return
